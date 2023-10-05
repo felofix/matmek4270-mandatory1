@@ -124,7 +124,10 @@ class Wave2D:
             if n % store_data == 0:
                 plotdata[n] = self.Unm1.copy() # Unm1 is now swapped to Un
 
-        return self.h, self.l2_error(self.ue(), (Nt)*self.dt)
+        if store_data == -1:
+            return self.h, self.l2_error(self.ue(), (Nt)*self.dt)
+        if store_data > 0:
+            return self.xij, self.yij, plotdata
         
 
     def convergence_rates(self, m=4, cfl=0.1, Nt=10, mx=3, my=3):
